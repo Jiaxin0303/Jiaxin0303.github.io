@@ -15,41 +15,30 @@ custom_js:
 
 This project uses the building_inventory.csv dataset to create a set of advanced interactive visualizations. Using Altair, which outputs Vega-Lite JSON specifications, we constructed two linked interactive views that go well beyond basic pan and zoom.
 
-The first visualization is a stacked bar chart with a year slider. In this chart, the horizontal axis represents the county, and the vertical axis shows the number of buildings. The data is further split by building status (Bldg Status) using color. Users can adjust the slider to filter out buildings acquired before a selected year, allowing an in-depth exploration of building acquisition over time.
+## Visualization 1: Stacked Bar Chart by County and Building Status
+- The first visualization presents the number of buildings by county, categorized by building status (e.g., Abandoned, In Progress, In Use). 
+- The design choice of a stacked bar chart allows for easy comparison between counties and clear visualization of status composition within each county. I encoded counties along the x-axis as nominal data and the building count on the y-axis as quantitative data. The building statuses are color-coded using a categorical color scheme to distinctly highlight differences. 
+- Data preprocessing included converting relevant numeric columns, such as "Year Acquired," into numerical types and removing rows with missing values.
+
+For interactivity, this chart includes two interactive filters: a year slider and a county dropdown menu. The "Starting Year" slider allows the viewer to dynamically filter the buildings acquired after a selected year, enhancing exploration through temporal dimensions. The county dropdown provides further granularity, letting the viewer focus on data from specific counties or view data from all counties simultaneously. These interactive components significantly enrich the analytical depth of the visualization.
 
 <vegachart schema-url="{{ site.baseurl }}/assets/json/bar_chart.json" style="width: 100%"></vegachart>
 
-The second visualization is a linked view that combines:
+## Visualization 2: Linked Scatter Plot and Bar Chart
 
-- A scatter plot showing building characteristics – with "Floors Above Grade" on the x-axis, "Floors Below Grade" on the y-axis, point size indicating "Square Footage" and color representing "Usage Description".
+- The second visualization features a linked scatter plot and bar chart to explore relationships between floors above grade, floors below grade, and building usage. 
+- The scatter plot displays "Floors Above Grade" versus "Floors Below Grade," with each point representing a building. Point sizes are scaled according to "Square Footage," providing a quick visual indicator of building size, and colors are assigned based on "Usage Description," utilizing a qualitative color palette for clarity and ease of differentiation.
 
-- A bar chart that dynamically updates based on an interval brush selection on the scatter plot, presenting the distribution of building statuses (Bldg Status) within the selected region.
-
-These interactive features—implemented via parameter binding for the slider and brush selection for the linked view—enable a more insightful exploration of the multi-dimensional building inventory data.
+Interactivity in this visualization is provided through brushing (interval selection). Users can select areas on the scatter plot, dynamically updating the adjacent bar chart, which shows the distribution of selected buildings by their building status. This interactive linkage between the scatter and bar charts enables deeper data exploration and facilitates identifying patterns or anomalies within specific subsets of the data.
 
 <vegachart schema-url="{{ site.baseurl }}/assets/json/linked_view.json" style="width: 100%"></vegachart>
 
 
 
-
-## Search The Data & Methods
-
-Below is where we can put some links to both the data and the analysis code as buttons:
-
-```
-<div class="left">
-{% include elements/button.html link="https://github.com/vega/vega/blob/main/docs/data/cars.json" text="The Data" %}
-</div>
-
-<div class="right">
-{% include elements/button.html link="https://blog.4dcu.be/programming/2021/05/03/Interactive-Visualizations.html" text="The Analysis" %}
-</div>
-```
-
 <!-- these are written in a combo of html and liquid --> 
 
 <div class="left">
-{% include elements/button.html link="https://github.com/vega/vega/blob/main/docs/data/cars.json" text="The Data" %}
+{% include elements/button.html link="https://raw.githubusercontent.com/UIUC-iSchool-DataViz/is445_data/main/building_inventory.csv" text="The Data" %}
 </div>
 
 <div class="right">
