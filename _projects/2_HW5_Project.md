@@ -1,8 +1,8 @@
 ---
 name: HW5 Project
-tools: [Python, HTML, altair]
-image: assets/pngs/cars.png
-description: This is a "showcase" project that uses vega-lite for interactive viz!
+tools: [Python, HTML, altair, Vega-Lite]
+image: assets/pngs/building_inventory.png
+description: This project showcases interactive visualizations based on the building_inventory.csv dataset using Altair for advanced interactivity!
 custom_js:
   - vega.min
   - vega-lite.min
@@ -11,19 +11,25 @@ custom_js:
 ---
 
 
-# Example including vega-lite
+# Building Inventory Interactive Visualization
 
-Example comes from this [great blog post right here](https://blog.4dcu.be/programming/2021/05/03/Interactive-Visualizations.html) that was also used in [our test import script](https://github.com/UIUC-iSchool-DataViz/is445_bcubcg_fall2022/blob/main/week01/test_imports_week01.ipynb).
+This project uses the building_inventory.csv dataset to create a set of advanced interactive visualizations. Using Altair, which outputs Vega-Lite JSON specifications, we constructed two linked interactive views that go well beyond basic pan and zoom.
 
-We can use a vegachart HTML tag like so:
-
-```
-<vegachart schema-url="{{ site.baseurl }}/assets/json/bar_chart.json" style="width: 100%"></vegachart>
-```
+The first visualization is a stacked bar chart with a year slider. In this chart, the horizontal axis represents the county, and the vertical axis shows the number of buildings. The data is further split by building status (Bldg Status) using color. Users can adjust the slider to filter out buildings acquired before a selected year, allowing an in-depth exploration of building acquisition over time.
 
 <vegachart schema-url="{{ site.baseurl }}/assets/json/bar_chart.json" style="width: 100%"></vegachart>
 
-In theory, you can also use [Jekyll hooks](https://jekyllrb.com/docs/plugins/hooks/) to do it, but I haven't figured out a way that looks nice yet.
+The second visualization is a linked view that combines:
+
+- A scatter plot showing building characteristics – with "Floors Above Grade" on the x-axis, "Floors Below Grade" on the y-axis, point size indicating "Square Footage" and color representing "Usage Description".
+
+- A bar chart that dynamically updates based on an interval brush selection on the scatter plot, presenting the distribution of building statuses (Bldg Status) within the selected region.
+
+These interactive features—implemented via parameter binding for the slider and brush selection for the linked view—enable a more insightful exploration of the multi-dimensional building inventory data.
+
+<vegachart schema-url="{{ site.baseurl }}/assets/json/linked_view.json" style="width: 100%"></vegachart>
+
+
 
 
 ## Search The Data & Methods
